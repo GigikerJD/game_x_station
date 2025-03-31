@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import PropTypes from "prop-types";
 
 
 const GameStationContext = createContext();
@@ -24,6 +25,10 @@ export const GameStationProvider = ({ children }) => {
         </GameStationContext.Provider>
     )
 }
+
+GameStationProvider.propTypes = {
+    children: PropTypes.node.isRequired
+};
 
 export const GameStationAuth = () => {
     return useContext(GameStationContext);

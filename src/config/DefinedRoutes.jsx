@@ -2,12 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import { Welcome } from "../pages/Welcome";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
+import { Dashboard } from "../pages/Dashboard";
+import { Settings } from "../pages/Settings";
 
-const router = createBrowserRouter([
+const AppRouter = createBrowserRouter([
 
     {
         path: '/',
-        element: <Welcome/>
+        element: <Welcome/>,
     },
     {
         path: '/login',
@@ -16,7 +18,15 @@ const router = createBrowserRouter([
     {
         path: 'register',
         element: <Register/>
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard/>
+    },
+    {
+        path: '/settings',
+        element: <Settings/>
     }
 ])
 
-export default router;
+export default AppRouter;
