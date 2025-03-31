@@ -4,23 +4,44 @@ import { Register } from "../pages/Register";
 import { Dashboard } from "../pages/Dashboard";
 import { Cart } from "../pages/Cart";
 import { Settings } from "../pages/Settings";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { GameStationAuth } from "./GameStationProvider";
 
 const AppRouter = () => {
+    const { isLoggedIn } = GameStationAuth();
     return (
         <>
             <Routes>
-                <Route path="/" element={<Welcome />} />
+                <Route 
+                    path="/" 
+                    element={
+                        isLoggedIn ? <Navigate to="/dashboard" /> : <Welcome/>
+                    } 
+                />
                 
-                <Route path="/login" element={<Login />} />
+                <Route 
+                    path="/login" 
+                    element={
+                        <ProtectedRoute endpointLoggedOut="/login">
+                            <Login/>
+                        </ProtectedRoute>
+                    } 
+                />
                 
-                <Route path="/register" element={<Register />} />
+                <Route
+                    path="/register"
+                    element={
+                        <ProtectedRoute endpointLoggedOut="/register">
+                            <Register/>
+                        </ProtectedRoute>
+                    }
+                />
                 
                 <Route 
                     path="/dashboard" 
                     element={
-                        <ProtectedRoute endpointLoggedOut="login">
+                        <ProtectedRoute endpointLoggedOut="/login">
                             <Dashboard/>
                         </ProtectedRoute>
                     } 
@@ -29,7 +50,7 @@ const AppRouter = () => {
                 <Route
                     path="/shopcart"
                     element={
-                        <ProtectedRoute endpointLoggedOut="login">
+                        <ProtectedRoute endpointLoggedOut="/login">
                             <Cart/>
                         </ProtectedRoute>
                     }

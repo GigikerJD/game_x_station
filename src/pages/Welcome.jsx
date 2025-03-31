@@ -1,8 +1,9 @@
 
-export const Welcome = () => {
+
+export const Welcome = () => {  
   return (
     <>
-      Je suis la page Welcome.
+      <p>Je suis la page Welcome.</p>
     </>
   )
 }
